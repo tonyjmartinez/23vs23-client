@@ -1,5 +1,4 @@
 const path = require("path");
-const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const workboxPlugin = require("workbox-webpack-plugin");
@@ -11,10 +10,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     chunkFilename: "[id].js",
-    publicPath: ""
+    publicPath: "",
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
 
   module: {
@@ -22,51 +21,46 @@ module.exports = {
       {
         test: /\.js$/,
         loader: "babel-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: "style-loader",
           },
           {
             loader: "css-loader",
             options: {
               importLoaders: 1,
               modules: true,
-              localIdentName: "[name]__[local]__[hash:base64:5]"
-            }
+              localIdentName: "[name]__[local]__[hash:base64:5]",
+            },
           },
           {
             loader: "postcss-loader",
             options: {
               ident: "postcss",
-              plugins: () => [
-                autoprefixer({
-                  browsers: ["> 1%", "last 2 versions"]
-                })
-              ]
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpe?g|gift)$/,
-        loader: "url-loader?limit=8000&name=images/[name].[ext]"
-      }
-    ]
+        loader: "url-loader?limit=8000&name=images/[name].[ext]",
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
       filename: "index.html",
-      inject: "body"
+      inject: "body",
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new workboxPlugin.InjectManifest({
       swSrc: "./src/sw.js",
-      swDest: "sw.js"
+      swDest: "sw.js",
     }),
     new webpackPwaManifest({
       name: "23vs23",
@@ -75,7 +69,7 @@ module.exports = {
       background_color: "#000000",
       start_url: "/index.html",
       filename: "manifest.json",
-      theme_color: "#000000"
-    })
-  ]
+      theme_color: "#000000",
+    }),
+  ],
 };
