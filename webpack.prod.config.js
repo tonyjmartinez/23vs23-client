@@ -1,8 +1,10 @@
 const path = require("path");
+const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const workboxPlugin = require("workbox-webpack-plugin");
 const webpackPwaManifest = require("webpack-pwa-manifest");
+
 module.exports = {
   devtool: "cheap-module-source-map",
   entry: "./src/index.js",
@@ -41,6 +43,11 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               ident: "postcss",
+              plugins: () => [
+                autoprefixer({
+                  browsers: ["> 1%", "last 2 versions"],
+                }),
+              ],
             },
           },
         ],
