@@ -19,7 +19,7 @@ const selectStyle = {
   color: "#0095B3",
   fontSize: "1.2em",
   appearance: "none",
-  borderBottom: "3px solid " + colors.blue
+  borderBottom: "3px solid " + colors.blue,
 };
 
 const selectStyleYear = {
@@ -28,34 +28,34 @@ const selectStyleYear = {
   color: "#0095B3",
   fontSize: "1.2em",
   appearance: "none",
-  borderBottom: "3px solid " + colors.blue
+  borderBottom: "3px solid " + colors.blue,
 };
 
 const optionStyle = {
   borderTop: "none",
-  color: colors.blue
+  color: colors.blue,
 };
 
 class SimpleSelect extends React.Component {
   state = {
     season: "2019-2020",
-    seasonType: "regular"
+    seasonType: "regular",
   };
 
   componentDidMount() {}
-  season = event => {
+  season = (event) => {
     this.setState({ season: event.target.value });
     this.props.fetchPlayersList(event.target.value, this.state.seasonType);
   };
 
-  seasonType = event => {
+  seasonType = (event) => {
     let type = event.target.value;
     if (event.target.value === "regular") {
       this.setState({ season: "2019-2020", seasonType: type });
       this.props.fetchPlayersList("2019-2020", type);
     } else {
-      this.setState({ season: "2019", seasonType: type });
-      this.props.fetchPlayersList("2019", type);
+      this.setState({ season: "2020", seasonType: type });
+      this.props.fetchPlayersList("2020", type);
     }
   };
 
@@ -67,7 +67,7 @@ class SimpleSelect extends React.Component {
           right: 0,
           position: "absolute",
           top: "calc(50% - 12px)",
-          pointerEvents: "none"
+          pointerEvents: "none",
         }}
       />
     );
@@ -91,22 +91,25 @@ class SimpleSelect extends React.Component {
         </MenuItem>,
         <MenuItem key={5} style={optionStyle} value="2015-2016">
           2015-16
-        </MenuItem>
+        </MenuItem>,
       ];
     } else if (this.state.seasonType === "playoff") {
       options = [
         <MenuItem key={6} style={optionStyle} value="2019">
+          2020
+        </MenuItem>,
+        <MenuItem key={7} style={optionStyle} value="2019">
           2019
         </MenuItem>,
-        <MenuItem key={7} style={optionStyle} value="2018">
+        <MenuItem key={8} style={optionStyle} value="2018">
           2018
         </MenuItem>,
-        <MenuItem key={8} style={optionStyle} value="2017">
+        <MenuItem key={9} style={optionStyle} value="2017">
           2017
         </MenuItem>,
         <MenuItem key={9} style={optionStyle} value="2016">
           2016
-        </MenuItem>
+        </MenuItem>,
       ];
     }
     return (
@@ -139,7 +142,4 @@ class SimpleSelect extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  actions
-)(SimpleSelect);
+export default connect(null, actions)(SimpleSelect);
