@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import classes from "./SearchBox.css";
-import ReactAutocomplete from "react-autocomplete";
-import Person from "react-icons/lib/md/person";
-import PersonOutline from "react-icons/lib/md/person-outline";
-import SearchIcon from "react-icons/lib/md/search";
-import Media from "react-media";
-import Spinner from "../Spinner/Spinner";
+import React, { Component } from 'react';
+import classes from './SearchBox.css';
+import ReactAutocomplete from 'react-autocomplete';
+import Person from 'react-icons/lib/md/person';
+import PersonOutline from 'react-icons/lib/md/person-outline';
+import SearchIcon from 'react-icons/lib/md/search';
+import Media from 'react-media';
+import Spinner from '../Spinner/Spinner';
 class searchBox extends Component {
   state = {
-    value: "",
+    value: '',
     focus: false,
     dropdownOpacity: 0,
   };
@@ -17,7 +17,7 @@ class searchBox extends Component {
     this.props.noneSelected();
   };
   onFocus = () => {
-    this.setState({ value: "" });
+    this.setState({ value: '' });
     this.setState({ focus: true });
     this.props.onSelected();
     setTimeout(
@@ -30,50 +30,50 @@ class searchBox extends Component {
   render() {
     let border;
     if (this.state.focus) {
-      border = "5px solid " + this.props.themeColor;
+      border = '5px solid ' + this.props.themeColor;
     } else {
-      border = "5px solid #ccc";
+      border = '5px solid #ccc';
     }
     const inputStyle = {
       width: this.props.width,
       border: border,
-      borderRadius: "5px",
-      display: "inline-block",
-      padding: "8px 10px",
-      lineHeight: "8px",
+      borderRadius: '5px',
+      display: 'inline-block',
+      padding: '8px 10px',
+      lineHeight: '8px',
       outlineWidth: 0,
-      backgroundColor: "grey",
-      color: "white",
-      textOverflow: "ellipsis",
-      margin: "0px auto",
-      transition: "width 0.3s",
-      fontSize: "16px",
+      backgroundColor: 'grey',
+      color: 'white',
+      textOverflow: 'ellipsis',
+      margin: '0px auto',
+      transition: 'width 0.3s',
+      fontSize: '16px',
     };
     const wrapperStyle = {
-      width: "50%",
-      display: "inline-block",
-      outline: "none",
-      textAlign: "center",
-      whiteSpace: "nowrap",
+      width: '50%',
+      display: 'inline-block',
+      outline: 'none',
+      textAlign: 'center',
+      whiteSpace: 'nowrap',
     };
 
     const dropdownStyle = {
-      backgroundColor: "grey",
-      textOverflow: "ellipsis",
-      height: "30px",
-      lineHeight: "30px",
-      color: "white",
-      textAlign: "left",
-      paddingLeft: "10px",
+      backgroundColor: 'grey',
+      textOverflow: 'ellipsis',
+      height: '30px',
+      lineHeight: '30px',
+      color: 'white',
+      textAlign: 'left',
+      paddingLeft: '10px',
     };
 
     const dropdownStyleHL = {
       backgroundColor: this.props.themeColor,
-      color: "white",
-      height: "30px",
-      lineHeight: "30px",
-      textAlign: "left",
-      paddingLeft: "10px",
+      color: 'white',
+      height: '30px',
+      lineHeight: '30px',
+      textAlign: 'left',
+      paddingLeft: '10px',
     };
     let personIcon = <Person />;
 
@@ -83,9 +83,9 @@ class searchBox extends Component {
       personIcon = <PersonOutline color={this.props.themeColor} size={30} />;
     }
 
-    let placeholder = "Loading...";
+    let placeholder = 'Loading...';
     if (!this.props.loading) {
-      placeholder = "Search";
+      placeholder = 'Search';
     }
 
     let searchIcon = <Spinner style={{}} />;
@@ -101,43 +101,42 @@ class searchBox extends Component {
         />
       );
     }
-    console.log("players", this.props.players);
     return (
       <ReactAutocomplete
         renderInput={(props) => {
           return (
             <div
               style={{
-                marginTop: "0em",
-                width: "100%",
-                marginRight: "auto",
-                marginLeft: "auto",
+                marginTop: '0em',
+                width: '100%',
+                marginRight: 'auto',
+                marginLeft: 'auto',
               }}
             >
               <label
                 onClick={() => {
                   this.searchFocus.focus();
                 }}
-                style={{ marginTop: "0.3em" }}
+                style={{ marginTop: '0.3em' }}
               >
                 {personIcon}
               </label>
-              <Media query="(min-width: 400px)">
+              <Media query='(min-width: 400px)'>
                 {(matches) =>
                   matches ? (
                     <input
-                      id="auto"
+                      id='auto'
                       className={classes.PlaceHolder}
-                      spellCheck="false"
-                      type="text"
+                      spellCheck='false'
+                      type='text'
                       {...props}
                     />
                   ) : (
                     <input
-                      id="auto"
+                      id='auto'
                       className={classes.SmallInput}
-                      spellCheck="false"
-                      type="text"
+                      spellCheck='false'
+                      type='text'
                       {...props}
                     />
                   )
@@ -156,13 +155,13 @@ class searchBox extends Component {
         }}
         renderMenu={(items, value, style) => {
           let newStyle = {
-            position: "fixed",
-            overflow: "auto",
-            maxHeight: "50%",
-            borderRadius: "5px",
-            width: "30%",
-            transform: "translate(" + this.props.dropdownWidth + ", 0)",
-            transition: "opacity 0.1s ease-in",
+            position: 'fixed',
+            overflow: 'auto',
+            maxHeight: '50%',
+            borderRadius: '5px',
+            width: '30%',
+            transform: 'translate(' + this.props.dropdownWidth + ', 0)',
+            transition: 'opacity 0.1s ease-in',
             opacity: this.state.dropdownOpacity,
             zIndex: 2,
           };

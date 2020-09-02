@@ -1,89 +1,85 @@
-import * as types from "./types";
-import "babel-polyfill";
-import axios from "../../axios";
-import { task, of, rejected } from "folktale/concurrency/task";
-export const searchPlayerStart = playerAB => {
+import * as types from './types';
+import 'babel-polyfill';
+import axios from '../../axios';
+import { task, of, rejected } from 'folktale/concurrency/task';
+export const searchPlayerStart = (playerAB) => {
   return {
     type: types.SEARCH_PLAYER_START,
-    playerAB
+    playerAB,
   };
 };
 
 export const searchPlayerError = () => {
   return {
-    type: types.SEARCH_PLAYER_ERROR
+    type: types.SEARCH_PLAYER_ERROR,
   };
 };
 export const searchPlayerSuccess = (stats, playerAB) => {
   return {
     type: types.SEARCH_PLAYER_SUCCESS,
     stats,
-    playerAB
+    playerAB,
   };
 };
 
 export const searchPlayerTask = (season, playerName) =>
-  task(resolver => {
+  task((resolver) => {
     const res = axios
-      .get("/playerSearch?season=" + season + "&player=" + playerName, {
-        mode: "cors"
+      .get('/playerSearch?season=' + season + '&player=' + playerName, {
+        mode: 'cors',
       })
-      .then(res => {
+      .then((res) => {
         resolver.resolve(res);
       })
-      .catch(err => {
+      .catch((err) => {
         resolver.reject(err);
       });
   });
 
-export const clearPlayerDispatch = player => {
+export const clearPlayerDispatch = (player) => {
   return {
     type: types.CLEAR_PLAYER,
-    player
+    player,
   };
 };
 
-export const clearPlayer = player => dispatch => {
+export const clearPlayer = (player) => (dispatch) => {
   return dispatch(clearPlayerDispatch(player));
 };
 
-export const searchPlayer = (
-  season,
-  playerName,
-  playerAB
-) => async dispatch => {
+export const searchPlayer = (season, playerName, playerAB) => async (
+  dispatch
+) => {
   dispatch(searchPlayerStart(playerAB));
   let player;
   let name = playerName;
-  console.log(playerName);
-  playerName = playerName.replace(" Jr.", "Jr");
-  playerName = playerName.split("-").join("");
-  playerName = playerName.replace(" ", "-");
-  playerName = playerName.replace("'", "");
+  playerName = playerName.replace(' Jr.', 'Jr');
+  playerName = playerName.split('-').join('');
+  playerName = playerName.replace(' ', '-');
+  playerName = playerName.replace("'", '');
   const res = await searchPlayerTask(season, playerName)
     .run()
     .promise()
-    .catch(e => "error");
+    .catch((e) => 'error');
   if (res.data.data === undefined) {
     return dispatch(searchPlayerError());
   }
   player = res.data.data[0];
   let stats = {
-    AST: parseFloat(player.stats.AstPerGame["#text"]),
-    PTS: parseFloat(player.stats.PtsPerGame["#text"]),
-    REB: parseFloat(player.stats.RebPerGame["#text"]),
-    STL: parseFloat(player.stats.StlPerGame["#text"]),
-    BLK: parseFloat(player.stats.BlkPerGame["#text"]),
-    MIN: parseFloat(player.stats.MinSecondsPerGame["#text"] / 60).toFixed(1),
-    BPM: parseFloat(player.stats.PlusMinusPerGame["#text"]),
-    TO: parseFloat(player.stats.TovPerGame["#text"]),
-    DREB: parseFloat(player.stats.DefRebPerGame["#text"]),
-    OREB: parseFloat(player.stats.OffRebPerGame["#text"]),
-    FGPCT: parseFloat(player.stats.FgPct["#text"]),
-    FG3PTPCT: parseFloat(player.stats.Fg3PtPct["#text"]),
-    FTPCT: parseFloat(player.stats.FtPct["#text"]),
-    NAME: name
+    AST: parseFloat(player.stats.AstPerGame['#text']),
+    PTS: parseFloat(player.stats.PtsPerGame['#text']),
+    REB: parseFloat(player.stats.RebPerGame['#text']),
+    STL: parseFloat(player.stats.StlPerGame['#text']),
+    BLK: parseFloat(player.stats.BlkPerGame['#text']),
+    MIN: parseFloat(player.stats.MinSecondsPerGame['#text'] / 60).toFixed(1),
+    BPM: parseFloat(player.stats.PlusMinusPerGame['#text']),
+    TO: parseFloat(player.stats.TovPerGame['#text']),
+    DREB: parseFloat(player.stats.DefRebPerGame['#text']),
+    OREB: parseFloat(player.stats.OffRebPerGame['#text']),
+    FGPCT: parseFloat(player.stats.FgPct['#text']),
+    FG3PTPCT: parseFloat(player.stats.Fg3PtPct['#text']),
+    FTPCT: parseFloat(player.stats.FtPct['#text']),
+    NAME: name,
   };
-  console.log("[searchPlayer.js]", player.stats);
   return dispatch(searchPlayerSuccess(stats, playerAB));
 };
