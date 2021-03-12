@@ -1,0 +1,6 @@
+[dev]
+  publish = "public"
+  command = "npm start"
+  functions = "lambda"
+  targetPort = 8080
+  framework = "#custom"
