@@ -1,11 +1,6 @@
 const axios = require('axios')
 const btoa = require('btoa')
 
-const config = {
-  key: '9e90f2b2-a543-4008-8b0f-97dfde',
-  pword: 'tobyjuanginobili20',
-}
-
 module.exports.handler = async function (event, context) {
   const season = event.queryStringParameters.season
   console.log('in here =====')
