@@ -15,7 +15,8 @@ module.exports.handler = async function (event, context) {
       url: url,
       type: 'GET',
       headers: {
-        Authorization: 'Basic ' + btoa(config.key + ':' + config.pword),
+        Authorization:
+          'Basic ' + btoa(process.env.MSF_KEY + ':' + process.env.MSF_PASSWORD),
       },
     })
   } catch (err) {
