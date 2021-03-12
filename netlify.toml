@@ -1,10 +1,10 @@
 [dev]
-  publish = "public"
+  publish = "dist"
   command = "npm start"
   functions = "lambda"
   targetPort = 8080
   framework = "#custom"
 [build]
-  publish = "public"
+  publish = "dist"
   command = "npm run build"
   functions = "lambda"
