@@ -4,3 +4,7 @@
   functions = "lambda"
   targetPort = 8080
   framework = "#custom"
+[build]
+  publish = "public"
+  command = "npm run build"
+  functions = "lambda"
