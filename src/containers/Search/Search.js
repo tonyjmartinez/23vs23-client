@@ -127,7 +127,7 @@ class Search extends Component {
 
   componentDidMount() {
     //this.fetchPlayers("2017-2018-regular");
-    this.props.fetchPlayersList('2019-2020', 'regular')
+    this.props.fetchPlayersList('2020-2021', 'regular')
   }
 
   searchForPlayer = (playerName, playerAB) => {

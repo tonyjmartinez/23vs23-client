@@ -3,7 +3,7 @@ const btoa = require('btoa')
 
 module.exports.handler = async function (event, context) {
   const season = event.queryStringParameters.season
-  console.log('in here =====')
+  console.log('in here =====', process.env.MSF_KEY)
   // const season = '2020-2021-regular'
   const url =
     'https://api.mysportsfeeds.com/v1.2/pull/nba/' +
@@ -20,7 +20,7 @@ module.exports.handler = async function (event, context) {
       },
     })
   } catch (err) {
-    // console.log(err)
+    console.log(err)
   }
 
   return {
