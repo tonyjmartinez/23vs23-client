@@ -13,7 +13,7 @@ import SwapIcon from "react-icons/lib/md/swap-horiz";
 import PlayersBar from "../../components/PlayersBar/PlayersBar";
 
 const countingStatsDomain = [
-  { name: "PTS", domain: [0, 35] },
+  { name: "PTS", domain: [0, 35], tickFormat: t => ~~(t) },
   { name: "REB", domain: [0, 25], tickFormat: t => Math.round(t) },
   { name: "AST", domain: [0, 15], tickFormat: t => Math.round(t) },
   { name: "STL", domain: [0, 10], tickFormat: t => Math.round(t) },

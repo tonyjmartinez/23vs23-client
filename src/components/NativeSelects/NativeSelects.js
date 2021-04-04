@@ -83,35 +83,11 @@ class SimpleSelect extends React.Component {
         <MenuItem key={1} style={optionStyle} value="2019-2020">
           2019-20
         </MenuItem>,
-        <MenuItem key={2} style={optionStyle} value="2018-2019">
-          2018-19
-        </MenuItem>,
-        <MenuItem key={3} style={optionStyle} value="2017-2018">
-          2017-18
-        </MenuItem>,
-        <MenuItem key={4} style={optionStyle} value="2016-2017">
-          2016-17
-        </MenuItem>,
-        <MenuItem key={5} style={optionStyle} value="2015-2016">
-          2015-16
-        </MenuItem>,
       ]
     } else if (this.state.seasonType === 'playoff') {
       options = [
         <MenuItem key={6} style={optionStyle} value="2020">
           2020
-        </MenuItem>,
-        <MenuItem key={7} style={optionStyle} value="2019">
-          2019
-        </MenuItem>,
-        <MenuItem key={8} style={optionStyle} value="2018">
-          2018
-        </MenuItem>,
-        <MenuItem key={9} style={optionStyle} value="2017">
-          2017
-        </MenuItem>,
-        <MenuItem key={9} style={optionStyle} value="2016">
-          2016
         </MenuItem>,
       ]
     }
